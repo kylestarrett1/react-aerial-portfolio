@@ -1,0 +1,29 @@
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+@import 'base/vendor';
+@import 'base/breakpoints';
+
+/* Wrapper */
+
+#wrapper {
+  opacity: 1 !important;
+}
+
+/* Overlay */
+
+#overlay {
+  opacity: 1 !important;
+}
+
+/* Header */
+
+#header {
+  opacity: 1 !important;
+
+  nav {
+    li {
+      opacity: 1 !important;
+    }
+  }
+}
