@@ -1,17 +1,18 @@
 // Misc.
 $misc: (
-  bg: #348cb2 url('images/bg-landscape.jpg') bottom left,
-  bg-width: 1500px // bg-width: 3840px,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  // bg: #348cb2 url('images/bg-landscape.jpg') bottom left,
+  bg: #348cb2 url('images/bg-landscape__comp.jpg') bottom left,
+  bg-width: 1500px // bg-width: 3840px,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 );
 
 // Duration.
 $duration: (
-  // bg: 60s,
   bg: 45s,
   wrapper: 3s,
   overlay: 1.5s,
   header: 1s,
-  nav-icons: 0.5s
+  nav-icons: 0.5s,
+  clipboard: 4s,
 );
 
 // Size.

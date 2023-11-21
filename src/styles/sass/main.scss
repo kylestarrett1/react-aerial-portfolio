@@ -2,28 +2,11 @@
 @import 'abstracts/mixins';
 @import 'abstracts/variables';
 
-@import 'base/animations';
-@import 'base/base';
 @import 'base/breakpoints';
-@import 'base/typography';
-@import 'base/utilities';
 @import 'base/vendor';
 
-@import 'components/button';
-@import 'components/card';
-@import 'components/form';
-@import 'components/icons';
-@import 'components/containers';
-
-@import 'layout/header';
-@import 'layout/footer';
-@import 'layout/grid';
-@import 'layout/navigation';
-
-@import 'pages/home';
-
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;800;900&display=swap');
-@import url('../css/fontawesome-all.min.css');
+// @import url('../css/fontawesome-all.min.css');
 
 // Breakpoints.
 
@@ -62,7 +45,6 @@
 
   #bg {
     background-size: $width auto;
-    // width: ($width * 3);
     width: ($width * 5);
   }
 }
@@ -280,6 +262,18 @@ a {
   }
 }
 
+.fa-icon {
+  @include vendor('transition', 'border-color 0.2s ease-in-out');
+  border-bottom: dotted 1px;
+  color: inherit;
+  outline: 0;
+  text-decoration: none;
+
+  &:hover {
+    border-color: transparent;
+  }
+}
+
 /* Icon */
 
 .icon {
@@ -300,6 +294,15 @@ a {
     &:before {
       font-family: 'Font Awesome 5 Brands';
     }
+  }
+}
+
+.fa-icon {
+  @include icon;
+  position: relative;
+
+  > .label {
+    display: none;
   }
 }
 
@@ -332,7 +335,6 @@ a {
   @include vendor('transform', 'translate3d(0,0,0)');
 
   /* Set your background with this */
-  //   background: _misc(bg);
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), _misc(bg);
 
   background-repeat: repeat;
@@ -343,7 +345,6 @@ a {
   top: 0;
 }
 
-// @include bg(_misc(bg-width) * 1.5);
 @include bg(_misc(bg-width) * 0.75);
 
 /* Overlay */
@@ -364,9 +365,7 @@ a {
     'overlay #{_duration(overlay)} #{$delay-overlay} forwards'
   );
   background-attachment: fixed, fixed;
-  // background-image: url('images/overlay-pattern.png'), url('images/overlay.svg');
-  background-image: url('images/textured-overlay.jpg'),
-    url('images/overlay.svg');
+  background-image: url('images/textured-overlay__comp.jpg');
   background-position: top left, center center;
   background-repeat: repeat, no-repeat;
   background-size: auto, cover;
@@ -430,7 +429,8 @@ a {
   @include vendor('backface-visibility', 'hidden');
   @include vendor('transform', 'translate3d(0,0,0)');
   cursor: default;
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   opacity: 0;
   position: relative;
   text-align: center;
@@ -465,7 +465,9 @@ a {
       );
       @include vendor('backface-visibility', 'hidden');
       @include vendor('transform', 'translate3d(0,0,0)');
-      display: inline-block;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
       height: _size(nav-icon-wrapper);
       line-height: _size(nav-icon-wrapper) * 1.1;
       opacity: 0;
@@ -483,13 +485,12 @@ a {
       }
     }
 
-    a {
+    .fa-icon {
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       -webkit-touch-callout: none;
-      border: 0;
       display: inline-block;
 
-      &:before {
+      &:first-child {
         @include vendor('transition', 'all 0.2s ease-in-out');
         border-radius: 100%;
         border: solid 1px _palette(fg);
@@ -504,19 +505,19 @@ a {
       }
 
       &:hover {
-        font-size: 1.1em;
+        transform: scale(1.1);
 
-        &:before {
+        &:first-child {
           background-color: _palette(nav-icon, hover-bg);
           color: _palette(nav-icon, hover-fg);
         }
       }
 
       &:active {
-        font-size: 0.95em;
+        font-size: _size(nav-icon) * 0.95;
         background: none;
 
-        &:before {
+        &:first-child {
           background-color: _palette(nav-icon, active-bg);
           color: _palette(nav-icon, active-fg);
         }
@@ -532,27 +533,50 @@ a {
     'background-image',
     'linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5) 75%)'
   );
-  // bottom: 0;
+
   display: flex;
+  align-items: flex-end;
   justify-content: center;
-  align-items: center;
+  bottom: 0;
   cursor: default;
   height: 6em;
-  // left: 0;
+  left: 0;
   line-height: 8em;
-  // position: absolute;
-  text-align: center;
+  position: absolute;
+  // text-align: center;
   width: 100%;
   height: 100vh;
-  background: #333;
+  user-select: none;
+  z-index: -1;
 }
 
-.contact {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
+/* Clipboard */
+
+@include keyframes('clipboard') {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.clipboard {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-bottom: 2rem;
+  color: _palette(fg);
+
+  &.animate {
+    animation: clipboard 3s ease-in-out both;
+  }
 }
 
 /* Wide */
@@ -623,16 +647,31 @@ a {
     nav {
       font-size: 1em;
 
-      a {
-        &:hover {
-          font-size: 1em;
-        }
+      @media (hover: none) {
+        .fa-icon {
+          &:hover {
+            transform: scale(1);
 
-        &:active {
-          font-size: 1em;
+            &:first-child {
+              background-color: _palette(nav-icon, hover-bg);
+              color: _palette(nav-icon, hover-fg);
+            }
+          }
+
+          &:active {
+            font-size: _size(nav-icon);
+            background: none;
+          }
         }
       }
     }
+  }
+
+  #footer {
+    @include vendor(
+      'background-image',
+      'linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.1) 75%)'
+    );
   }
 }
 

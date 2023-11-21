@@ -1,17 +1,87 @@
-import { Fragment, useRef, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
+import copy from 'copy-to-clipboard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import './styles/sass/main.scss';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import {
-//   faGithub,
-//   faLinkedin,
-//   faCodepen,
-// } from '@fortawesome/free-brands-svg-icons';
-
-import { Parallax, ParallaxLayer } from '@react-spring/parallax';
-
 const App = () => {
-  const ref = useRef();
+  const [copiedText, setCopiedText] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const [showClipboardAnimation, setShowClipboardAnimation] = useState(false);
+
+  const writeToMobileClipboard = async () => {
+    try {
+      let someAsyncMethod = () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve('this is text');
+          }, 1000);
+        });
+      };
+
+      const result = await someAsyncMethod()
+        .then((result) => {
+          console.log('Result:', result);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+
+      let copyText = '';
+      if (!result) {
+        copyText = '';
+      } else {
+        copyText = 'some string';
+      }
+
+      const clipboardItem = new ClipboardItem({
+        'text/plain': new Blob([copyText], { type: 'text/plain' }),
+      });
+
+      await navigator.clipboard.write([clipboardItem]);
+    } catch (error) {
+      console.error('Error copying to clipboard:', error);
+    }
+  };
+
+  const handleTouchStart = (event) => {
+    event.preventDefault();
+
+    if (navigator.clipboard && navigator.clipboard.write) {
+      writeToMobileClipboard();
+    } else {
+      console.log(
+        "Clipboard write not supported. Switching to 'copy-to-clipboard' library instead."
+      );
+      copy('kylestarrett1@gmail.com', {
+        debug: true,
+        message: 'Press #{key} to copy or select and copy',
+      });
+    }
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopiedText('email copied to clipboard');
+        setIsCopied(!isCopied);
+        setShowClipboardAnimation(true);
+      })
+      .catch((err) => {
+        setIsError(true);
+        setCopiedText('Could not copy to clipboard');
+        setIsCopied(false);
+        console.error('Could not copy to clipboard: ', err);
+      });
+  };
+
+  const handleEmailClick = () => {
+    const email = 'kylestarrett1@gmail.com';
+    copyToClipboard(email);
+  };
 
   useEffect(() => {
     document.body.classList.remove('is-preload');
@@ -32,75 +102,73 @@ const App = () => {
 
   return (
     <Fragment>
-      <Parallax pages={2} ref={ref}>
-        <ParallaxLayer offset={0} speed={1} factor={1}>
-          <div id="wrapper">
-            <div id="bg"></div>
-            <div id="overlay"></div>
-          </div>
-        </ParallaxLayer>
+      <div id="wrapper">
+        <div id="bg"></div>
+        <div id="overlay"></div>
+        <div id="main">
+          <header id="header">
+            <h1>Kyle Starrett</h1>
+            <p>Full-Stack Developer</p>
+            <nav>
+              <ul>
+                <li>
+                  <a
+                    href="https://www.github.com/kylestarrett1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="icon fa-icon brands"
+                    aria-label="Github"
+                  >
+                    <FontAwesomeIcon
+                      className="fa-icon__child"
+                      icon={faGithub}
+                    />
+                    <span className="label">Github</span>
+                  </a>
+                </li>
 
-        <ParallaxLayer sticky={{ start: 0, end: 0.3 }} speed={1}>
-          <div id="main">
-            {/* Header */}
-            <header id="header">
-              <h1>Kyle Starrett</h1>
-              <p>Full-Stack Developer</p>
-              <nav>
-                <ul>
-                  <li>
-                    <a
-                      href="https://www.github.com/kylestarrett1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="icon brands fa-github"
-                    >
-                      {/* <FontAwesomeIcon icon={faGithub} /> */}
-                      <span className="label">Github</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://www.linkedin.com/in/kylestarrett/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="icon brands fa-linkedin"
-                    >
-                      {/* <FontAwesomeIcon icon={faLinkedin} /> */}
-                      <span className="label">LinkedIn</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://codepen.io/kylestarrett1"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="icon brands fa-codepen"
-                    >
-                      {/* <FontAwesomeIcon icon={faCodepen} /> */}
-                      <span className="label">Codepen</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </header>
-          </div>
-        </ParallaxLayer>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/in/kylestarrett/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="icon fa-icon brands"
+                    aria-label="LinkedIn"
+                  >
+                    <FontAwesomeIcon
+                      className="fa-icon__child"
+                      icon={faLinkedin}
+                    />
+                    <span className="label">LinkedIn</span>
+                  </a>
+                </li>
 
-        <ParallaxLayer offset={1} factor={0.25} speed={1}>
-          {/* Footer */}
-          <footer id="footer">
-            <form action="" className="contact">
-              <label htmlFor="name"></label>
-              <input type="text" className="input name" />
-              <label htmlFor="email"></label>
-              <input type="email" className="input email" />
-              <label htmlFor="message"></label>
-              <input type="message" className="input message" />
-            </form>
-          </footer>
-        </ParallaxLayer>
-      </Parallax>
+                <li onTouchStart={handleTouchStart} onClick={handleEmailClick}>
+                  <a
+                    href="#!"
+                    className="icon fa-icon solid"
+                    aria-label="Email"
+                  >
+                    <FontAwesomeIcon
+                      className="fa-icon__child"
+                      icon={faEnvelope}
+                    />
+                    <span className="label">Email</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </header>
+          <footer id="footer"></footer>
+        </div>
+        {!isError && isCopied ? (
+          <p className={`clipboard ${showClipboardAnimation ? 'animate' : ''}`}>
+            {copiedText}
+          </p>
+        ) : (
+          ''
+        )}
+      </div>
     </Fragment>
   );
 };
