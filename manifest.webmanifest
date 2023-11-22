@@ -1,14 +1,40 @@
 {
+  "short_name": "Kyle Starrett",
+  "name": "Kyle Starrett's Portfolio Webpage",
   "icons": [
     {
-      "src": "/public/images/favicon/android-chrome-192x192.png",
+      "src": "/images/favicon/android-chrome-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/public/images/favicon/android-chrome-512x512.png",
+      "src": "/images/favicon/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
+    }
+  ],
+
+  "id": "https://starrett.io",
+  "start_url": "https://starrett.io",
+  "background_color": "#348cb2",
+  "display_override": ["window-control-overlay", "minimal-ui"],
+  "display": "standalone",
+  "theme_color": "#348cb2",
+
+  "screenshots": [
+    {
+      "src": "/images/bg-landscape__comp.jpg",
+      "sizes": "2200x2750",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "bg"
+    },
+    {
+      "src": "/images/bg-landscape__mobile.jpg",
+      "sizes": "480x600",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "bg"
     }
   ]
 }

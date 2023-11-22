@@ -98,7 +98,7 @@ const App = () => {
       window.ontouchmove = null;
       window.onorientationchange = null;
     };
-  }, []);
+  }, [isError, isCopied]);
 
   return (
     <Fragment>
@@ -106,10 +106,14 @@ const App = () => {
         <div id="bg"></div>
         <div id="overlay"></div>
         <div id="main">
-          <header id="header">
-            <h1>Kyle Starrett</h1>
-            <p>Full-Stack Developer</p>
-            <nav>
+          <header id="header" tabIndex={0} aria-label="Portfolio">
+            <h1 aria-label="Portfolio of Kyle Starrett" tabIndex={0}>
+              Kyle Starrett
+            </h1>
+            <p aria-label="Job Description: Full-Stack Developer" tabIndex={0}>
+              Full-Stack Developer
+            </p>
+            <nav tabIndex={0} aria-label="Portfolio">
               <ul>
                 <li>
                   <a
@@ -117,7 +121,7 @@ const App = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="icon fa-icon brands"
-                    aria-label="Github"
+                    aria-label="Kyle Starrett's Github profile"
                   >
                     <FontAwesomeIcon
                       className="fa-icon__child"
@@ -133,7 +137,7 @@ const App = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="icon fa-icon brands"
-                    aria-label="LinkedIn"
+                    aria-label="Kyle Starrett's LinkedIn profile"
                   >
                     <FontAwesomeIcon
                       className="fa-icon__child"
@@ -147,7 +151,7 @@ const App = () => {
                   <a
                     href="#!"
                     className="icon fa-icon solid"
-                    aria-label="Email"
+                    aria-label="Email: kylestarrett1@gmail.com. Use enter to copy to clipboard."
                   >
                     <FontAwesomeIcon
                       className="fa-icon__child"

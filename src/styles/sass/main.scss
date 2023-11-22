@@ -327,6 +327,16 @@ a {
   width: 100%;
 }
 
+/* Live Region */
+
+#live-region {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
 /* BG */
 
 #bg {
@@ -365,7 +375,7 @@ a {
     'overlay #{_duration(overlay)} #{$delay-overlay} forwards'
   );
   background-attachment: fixed, fixed;
-  background-image: url('images/textured-overlay__comp.jpg');
+  background-image: url('images/textured-overlay__resized.jpg');
   background-position: top left, center center;
   background-repeat: repeat, no-repeat;
   background-size: auto, cover;
