@@ -375,7 +375,8 @@ a {
     'overlay #{_duration(overlay)} #{$delay-overlay} forwards'
   );
   background-attachment: fixed, fixed;
-  background-image: url('images/textured-overlay__resized.jpg');
+  // background-image: url('images/textured-overlay__resized.jpg');
+  background-image: url('/images/textured-overlay__resized.jpg');
   background-position: top left, center center;
   background-repeat: repeat, no-repeat;
   background-size: auto, cover;
