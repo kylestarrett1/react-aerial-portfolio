@@ -3,12 +3,12 @@
   "name": "Kyle Starrett's Portfolio Webpage",
   "icons": [
     {
-      "src": "/images/favicon/android-chrome-192x192.png",
+      "src": "/src/assets/images/favicon/android-chrome-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/favicon/android-chrome-512x512.png",
+      "src": "/src/assets/images/favicon/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
@@ -23,14 +23,14 @@
 
   "screenshots": [
     {
-      "src": "/images/bg-landscape__comp.jpg",
+      "src": "/src/assets/images/bg-landscape__comp.jpg",
       "sizes": "2200x2750",
       "type": "image/jpeg",
       "form_factor": "wide",
       "label": "bg"
     },
     {
-      "src": "/images/bg-landscape__mobile.jpg",
+      "src": "/src/assets/images/bg-landscape__mobile.jpg",
       "sizes": "480x600",
       "type": "image/jpeg",
       "form_factor": "narrow",
