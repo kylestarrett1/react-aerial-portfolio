@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
   // PROD
   if (mode === 'production') {
     return {
-      base: '/vite/',
+      // base: '/vite/',
       appType: 'spa',
       css: {
         devSourcemap: true,
