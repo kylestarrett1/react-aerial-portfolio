@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Natours from '../assets/images/Natours.png';
 import Omni from '../assets/images/Omni-Consumer-Products.png';
 import WebRTC from '../assets/images/WebRTC.png';
+import Newsletter from '../assets/images/newsletter-img.png';
 
 const Gallery = () => {
   const [mouseDownAt, setMouseDownAt] = useState(0);
@@ -98,6 +99,18 @@ const Gallery = () => {
               <h2>WebRTC Chat</h2>
             </a>
             <img className="image" src={WebRTC} draggable="false" />
+          </div>
+
+          <div className="imgContainer">
+            <a
+              className="newsletter"
+              href="https://starrett-summer-newsletter.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h2>Newsletter Template</h2>
+            </a>
+            <img className="image" src={Newsletter} draggable="false" />
           </div>
         </div>
       </div>
