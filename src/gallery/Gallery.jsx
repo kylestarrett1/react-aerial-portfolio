@@ -1,68 +1,64 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 import Natours from '../assets/images/Natours.png';
 import Omni from '../assets/images/Omni-Consumer-Products.png';
 import WebRTC from '../assets/images/WebRTC.png';
 import Newsletter from '../assets/images/newsletter-img.png';
 
+const images = [
+  {
+    name: 'Natours',
+    image: Natours,
+    url: 'https://starrett-kyle-natours.netlify.app/',
+  },
+  {
+    name: 'Omni Consumer Products',
+    image: Omni,
+    url: 'https://starrett-omni-consumer-products.netlify.app/',
+  },
+  {
+    name: 'Web RTC',
+    image: WebRTC,
+    url: 'https://github.com/kylestarrett1/WebRTC-RT-Chat',
+  },
+  {
+    name: 'Summer Newsletter Template',
+    image: Newsletter,
+    url: 'https://starrett-summer-newsletter.netlify.app/',
+  },
+];
+
 const Gallery = () => {
-  const [mouseDownAt, setMouseDownAt] = useState(0);
-  const [prevPercentage, setPrevPercentage] = useState(0);
-  const [percentage, setPercentage] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleOnDown = (e) => setMouseDownAt(e.clientX);
-
-  const handleOnUp = () => {
-    setMouseDownAt(0);
-    setPrevPercentage(percentage);
-  };
-
-  const handleOnMove = (e) => {
-    if (mouseDownAt === 0) return;
-
-    const mouseDelta = mouseDownAt - e.clientX;
-    const maxDelta = window.innerWidth / 2;
-
-    const nextPercentageUnconstrained =
-      prevPercentage + (mouseDelta / maxDelta) * -100;
-    const nextPercentage = Math.max(
-      Math.min(nextPercentageUnconstrained, 0),
-      -100
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-
-    setPercentage(nextPercentage);
-
-    const track = document.getElementById('image-track');
-    track.style.transform = `translate(${nextPercentage}%, -50%)`;
-
-    const images = track.getElementsByClassName('image');
-    for (const image of images) {
-      image.style.objectPosition = `${100 + nextPercentage}% center`;
-    }
   };
 
-  // Attach event listeners
-  React.useEffect(() => {
-    window.addEventListener('mousedown', handleOnDown);
-    window.addEventListener('touchstart', handleOnDown);
-    window.addEventListener('mouseup', handleOnUp);
-    window.addEventListener('touchend', handleOnUp);
-    window.addEventListener('mousemove', handleOnMove);
-    window.addEventListener('touchmove', handleOnMove);
-
-    return () => {
-      window.removeEventListener('mousedown', handleOnDown);
-      window.removeEventListener('touchstart', handleOnDown);
-      window.removeEventListener('mouseup', handleOnUp);
-      window.removeEventListener('touchend', handleOnUp);
-      window.removeEventListener('mousemove', handleOnMove);
-      window.removeEventListener('touchmove', handleOnMove);
-    };
-  });
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
   return (
     <div id="gallery-main">
       <div className="gallery-container">
+        <a onClick={goToPrevious} className="gallery-controls select-left">
+          <FontAwesomeIcon
+            className="icon carousel-control-icon"
+            icon={faChevronLeft}
+          />
+        </a>
+
         <div
           id="image-track"
           data-mouse-down-at="0"
@@ -70,49 +66,26 @@ const Gallery = () => {
         >
           <div className="imgContainer">
             <a
-              href="https://starrett-kyle-natours.netlify.app/"
+              href={images[currentIndex].url}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <h2>Natours</h2>
+              <h2>{images[currentIndex].name}</h2>
+              <img
+                className="image"
+                src={images[currentIndex].image}
+                alt={`Image ${currentIndex}`}
+              />
             </a>
-            <img className="image" src={Natours} draggable="false" />
-          </div>
-
-          <div className="imgContainer">
-            <a
-              href="https://starrett-omni-consumer-products.netlify.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2>Omni Consumer Products</h2>
-            </a>
-            <img className="image" src={Omni} draggable="false" />
-          </div>
-
-          <div className="imgContainer">
-            <a
-              href="https://github.com/kylestarrett1/WebRTC-RT-Chat"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2>WebRTC Chat</h2>
-            </a>
-            <img className="image" src={WebRTC} draggable="false" />
-          </div>
-
-          <div className="imgContainer">
-            <a
-              className="newsletter"
-              href="https://starrett-summer-newsletter.netlify.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h2>Newsletter Template</h2>
-            </a>
-            <img className="image" src={Newsletter} draggable="false" />
           </div>
         </div>
+
+        <a onClick={goToNext} className="gallery-controls select-right">
+          <FontAwesomeIcon
+            icon={faChevronRight}
+            className="icon carousel-control-icon"
+          />
+        </a>
       </div>
     </div>
   );
