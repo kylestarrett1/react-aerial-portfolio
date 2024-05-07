@@ -72,10 +72,12 @@
 }
 
 .imgContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+
+  display: grid;
+  text-align: center;
 }
 
 .image {
@@ -89,12 +91,29 @@
   width: 40vmin;
 }
 
-.imgContainer h2 {
+.bio-container {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+
+  padding: 2rem 1rem;
+}
+
+.bio-heading {
+  font-size: 16pt;
   font-weight: 700;
   transition: color 0.5s;
   cursor: pointer;
   letter-spacing: 0.11em;
-  text-align: center;
+
+  margin-bottom: 0.5rem;
+}
+
+.bio-text {
+  font-size: 13pt;
+  line-height: 1.5rem;
+  width: 75%;
+  justify-self: center;
 }
 
 .imgContainer h2:hover {
@@ -108,6 +127,9 @@ a {
 /* Wide */
 
 @include breakpoint('<=wide') {
+  .bio-text {
+    width: 75%;
+  }
 }
 
 /* Normal */
@@ -115,6 +137,14 @@ a {
 @include breakpoint('<=normal') {
   .image {
     height: 45vmin;
+  }
+
+  .bio-heading {
+    font-size: 14pt;
+  }
+
+  .bio-text {
+    font-size: 12.5pt;
   }
 }
 
@@ -124,9 +154,20 @@ a {
   .image {
     height: 40vmin;
   }
+
+  .bio-heading {
+    font-size: 12pt;
+  }
+
+  .bio-text {
+    width: 50%;
+  }
 }
 
 /* Mobile (Portrait) */
 
 @include breakpoint('<=mobilep') {
+  .bio-text {
+    display: none;
+  }
 }

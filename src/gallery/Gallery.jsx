@@ -6,8 +6,8 @@ import {
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 
-import Natours from '../assets/images/Natours.png';
-import Omni from '../assets/images/Omni-Consumer-Products.png';
+import Natours from '../assets/images/Natours__comp.jpg';
+import Omni from '../assets/images/Omni-Consumer-Products__comp.jpg';
 import WebRTC from '../assets/images/WebRTC.png';
 import Newsletter from '../assets/images/newsletter-img.png';
 
@@ -16,21 +16,25 @@ const images = [
     name: 'Natours',
     image: Natours,
     url: 'https://starrett-kyle-natours.netlify.app/',
+    bio: "Explore. Discover. Conserve. Your gateway to immersive nature experiences worldwide, with eco-friendly tours and outdoor activities. Join us in preserving our planet's beauty for future generations.",
   },
   {
-    name: 'Omni Consumer Products',
+    name: 'Omni-Consumer-Products',
     image: Omni,
     url: 'https://starrett-omni-consumer-products.netlify.app/',
+    bio: 'Nourish Your Lifestyle. Tailored healthy meals delivered to your doorstep based on your schedule, making eating well effortless and convenient.',
   },
   {
     name: 'Web RTC',
     image: WebRTC,
     url: 'https://github.com/kylestarrett1/WebRTC-RT-Chat',
+    bio: 'Seamlessly connecting users worldwide, our platform offers crystal-clear video and audio quality, along with robust messaging capabilities, for effortless communication across devices. Join us and experience the future of real-time online interaction with ease and reliability.',
   },
   {
     name: 'Summer Newsletter Template',
     image: Newsletter,
     url: 'https://starrett-summer-newsletter.netlify.app/',
+    bio: 'Elevate Your Newsletter Game: Unlock the Power of HTML5, CSS3, and Vanilla JavaScript with Our Dynamic Templates. Create Stunning, Responsive Campaigns Effortlessly and Stand Out in Every Inbox.',
   },
 ];
 
@@ -65,18 +69,19 @@ const Gallery = () => {
           data-preview-percentage="0"
         >
           <div className="imgContainer">
+            <h2 className="bio-heading">{images[currentIndex].name}</h2>
             <a
               href={images[currentIndex].url}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <h2>{images[currentIndex].name}</h2>
               <img
                 className="image"
                 src={images[currentIndex].image}
                 alt={`Image ${currentIndex}`}
               />
             </a>
+            <p className="bio-text">{images[currentIndex].bio}</p>
           </div>
         </div>
 
