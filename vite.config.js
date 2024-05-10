@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 
+import million from 'million/compiler';
 import react from '@vitejs/plugin-react';
 import viteCompression from 'vite-plugin-compression';
 import viteImagemin from 'vite-plugin-imagemin';
@@ -77,6 +78,7 @@ export default defineConfig(({ mode }) => {
           threshold: 10240,
           deleteOriginFile: false,
         }),
+        million.vite({ auto: true }),
       ],
     };
   }

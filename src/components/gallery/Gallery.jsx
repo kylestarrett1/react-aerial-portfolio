@@ -6,10 +6,10 @@ import {
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 
-import Natours from '../assets/images/Natours__comp.jpg';
-import Omni from '../assets/images/Omni-Consumer-Products__comp.jpg';
-import WebRTC from '../assets/images/WebRTC.png';
-import Newsletter from '../assets/images/newsletter-img.png';
+import Natours from '../../assets/images/Natours__comp.jpg';
+import Omni from '../../assets/images/Omni-Consumer-Products__comp.jpg';
+import WebRTC from '../../assets/images/WebRTC.png';
+import Newsletter from '../../assets/images/newsletter-img.png';
 
 const images = [
   {
